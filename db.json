@@ -1,0 +1,82 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "name": "Santa Claus",
+      "email": "santa@northpole.com",
+      "password": "$2a$10$J5rUrpWcu6qc9gQcVED8L.Rzkw..yyorGORe6gQUwAKl9Q0FoufKe",
+      "role": "admin"
+    },
+    {
+      "id": "2",
+      "name": "Buddy the Elf",
+      "email": "buddy@elvesworkshop.com",
+      "password": "$2a$10$bUlXQmHqwAgBaUFlyyYYmu9F3ScXXtoHywa//Oi6wWQwf79hT6NI6",
+      "role": "toy_maker"
+    },
+    {
+      "id": "3",
+      "name": "Frostina Snowflake",
+      "email": "frostina@northpole.com",
+      "password": "$2a$10$RN9ZDMNOEYczoKD6JRfRrerirz.V8vRLmaKgW91rkKNwS23LBHR5.",
+      "role": "logistics_manager"
+    },
+    {
+      "id": "fa3d",
+      "name": "Massimo",
+      "email": "mas@mas.com",
+      "password": "$2b$10$33ODTunYgGq8jNsmq0S7DeocqQhZ2BCjShXOcBAXI9S6kI48lpeR.",
+      "role": "logistics_manager"
+    }
+  ],
+  "products": [
+    {
+      "id": "1",
+      "name": "Magic Sleigh",
+      "price": 9999.99,
+      "stock": 3,
+      "category": "transport",
+      "description": "High-speed sleigh powered by Christmas spirit and reindeer magic."
+    },
+    {
+      "id": "2",
+      "name": "Elf Hat Deluxe",
+      "price": 24.95,
+      "stock": 120,
+      "category": "clothing",
+      "description": "Green and red hat with a jingling bell — perfect for festive productivity."
+    },
+    {
+      "id": "3",
+      "name": "Reindeer Feed Mix",
+      "price": 12.5,
+      "stock": 50,
+      "category": "food",
+      "description": "Premium blend of oats, starlight, and holiday cheer for elite reindeer."
+    },
+    {
+      "id": "4",
+      "name": "North Pole GPS Beacon",
+      "price": 299.99,
+      "stock": 15,
+      "category": "tech",
+      "description": "Never get lost in a snowstorm again — find your way back to the workshop!"
+    },
+    {
+      "id": "5",
+      "name": "Gift Wrapping Kit",
+      "price": 19.99,
+      "stock": 200,
+      "category": "crafts",
+      "description": "Everything you need to wrap presents with perfect festive flair."
+    },
+    {
+      "id": "6",
+      "name": "Hot Cocoa Bombs",
+      "price": 8.99,
+      "stock": 75,
+      "category": "food",
+      "description": "Explosive chocolate experience that melts into the creamiest cocoa."
+    }
+  ]
+}
