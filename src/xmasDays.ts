@@ -15,4 +15,4 @@ export function xMasDays(){
     const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
 
     daysXmas.innerText = `Only ${diffDays} days left until Christmas! 🎄🎅🎁`;
-}
+} 
