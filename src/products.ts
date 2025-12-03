@@ -15,20 +15,23 @@ const renderList = (productList: Product[], onAddClick: AddToCartCallback) => {
     }
 
     productsDisplay.innerHTML = productList.map((product) => `
-        <div class="flex flex-col gap-4 justify-start items-start border p-4 rounded-lg shadow bg-white h-full">
-          <p class="text-xs font-bold text-white uppercase bg-red-300 border-2 border-red-600 px-2 py-1 rounded-lg">${product.category}</p>
-          <div class="flex flex-col justify-start items-start gap-2 flex-grow">
-            <h3 class="text-xl font-bold">${product.name}</h3>
-            <p>${product.description}</p>
-          </div>
-          <div>
-            <h4 class="text-green-600 font-bold">€ ${product.price}</h4>
-          </div>
-          <button 
-            data-id="${product.id}"
-            class="add-to-cart-btn bg-red-600 text-white px-4 py-2 rounded hover:bg-red-500 cursor-pointer w-full mt-auto">
-            Add Product to Sleigh
-          </button>
+        <div class="flex flex-col gap-4 justify-start items-start border border-b-2 border-b-red-500 p-4 rounded-lg shadow-md bg-white h-full">
+            <div class="w-full flex justify-between items-center">
+                <p class="text-xs font-bold text-white uppercase bg-red-300 border-2 border-red-600 px-2 py-1 rounded-lg">${product.category}</p>
+                <p class="text-sm text-gray-500"> &#128230 ${product.stock} in stock</p>
+            </div>
+            <div class="flex flex-col justify-start items-start gap-2 flex-grow">
+                <h3 class="text-xl font-bold">${product.name}</h3>
+                <p>${product.description}</p>
+            </div>
+            <div>
+                <h4 class="text-green-600 font-bold">€ ${product.price}</h4>
+            </div>
+            <button 
+                data-id="${product.id}"
+                class="add-to-cart-btn bg-red-600 text-white px-4 py-2 rounded hover:bg-red-500 cursor-pointer w-full mt-auto">
+                Add Product to Sleigh
+            </button>
         </div>
     `).join('');
 

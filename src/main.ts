@@ -1,21 +1,55 @@
-// main.ts
+// src/main.ts
 import './style.css';
 import { fetchProducts } from './api';
-import { initCart, addToCart } from './cart'; // Importeer wat we nodig hebben
+import { initCart, addToCart } from './cart';
 import { setupProducts } from './products';
+import { setupLogin, setupLogout, checkExistingSession } from './auth'; // Importeer de nieuwe functie
+import type { User } from './types';
 
-async function init() {
-  // 1. Haal data op
-  const products = await fetchProducts();
+const appContainer = document.getElementById('shop-app') as HTMLDivElement;
+const loginScreen = document.getElementById('login-screen') as HTMLDivElement;
+const welcomeMessage = document.getElementById('welcome-message') as HTMLHeadingElement;
+const userLoggedName = document.getElementById('userLoggedName') as HTMLSpanElement;
 
-  // 2. Initialiseer de winkelwagen (check localStorage, event listeners op icoon)
-  initCart();
+// Dit is de functie die de app opbouwt (wordt hergebruikt)
+async function startShopApp(user: User) {
+    console.log('App wordt gestart voor:', user.name);
 
-  // 3. Initialiseer de producten
-  // We geven de lijst mee EN de functie die uitgevoerd moet worden als er geklikt wordt
-  setupProducts(products, (product) => {
-      addToCart(product);
-  });
+    // 1. UI Updates
+    loginScreen.classList.add('hidden'); // Zeker weten dat login weg is
+    appContainer.classList.remove('hidden');
+    
+    if (welcomeMessage) {
+        welcomeMessage.textContent = `Welkom terug, ${user.name}!`;
+    };
+
+    if (userLoggedName) {
+        userLoggedName.innerText = user.name;
+    }
+
+    // 2. Data ophalen & Modules starten
+    const products = await fetchProducts();
+    
+    initCart();
+    
+    setupProducts(products, (product) => {
+        addToCart(product);
+    });
+
+    setupLogout();
 }
 
-init();
+// --- INITIALISATIE LOGICA ---
+
+// Stap 1: Check of er al een sessie is (vanuit een refresh)
+const existingUser = checkExistingSession();
+
+if (existingUser) {
+    // JA: Sla login over en start direct
+    startShopApp(existingUser);
+} else {
+    // NEE: Wacht tot de gebruiker het formulier invult
+    setupLogin((user) => {
+        startShopApp(user);
+    });
+}

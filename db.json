@@ -4,14 +4,14 @@
       "id": "1",
       "name": "Santa Claus",
       "email": "santa@northpole.com",
-      "password": "$2a$10$J5rUrpWcu6qc9gQcVED8L.Rzkw..yyorGORe6gQUwAKl9Q0FoufKe",
+      "password": "hohoho",
       "role": "admin"
     },
     {
       "id": "2",
       "name": "Buddy the Elf",
       "email": "buddy@elvesworkshop.com",
-      "password": "$2a$10$bUlXQmHqwAgBaUFlyyYYmu9F3ScXXtoHywa//Oi6wWQwf79hT6NI6",
+      "password": "Buddy123",
       "role": "toy_maker"
     },
     {
@@ -77,6 +77,54 @@
       "stock": 75,
       "category": "food",
       "description": "Explosive chocolate experience that melts into the creamiest cocoa."
+    },
+    {
+      "id": "7",
+      "name": "Reindeer Jetpack System",
+      "price": 4500.00,
+      "stock": 5,
+      "category": "transport",
+      "description": "For when the reindeer are tired. strap these on for Mach 2 delivery speeds. Helmet required."
+    },
+    {
+      "id": "8",
+      "name": "Tactical Santa Suit (Kevlar)",
+      "price": 899.99,
+      "stock": 10,
+      "category": "clothing",
+      "description": "Chimney-proof, dog-bite-proof, and fire-resistant. Look festive while staying safe in the danger zone."
+    },
+    {
+      "id": "9",
+      "name": "Liquid Christmas Spirit (100% Pure)",
+      "price": 150.00,
+      "stock": 25,
+      "category": "food",
+      "description": "Highly unstable energy drink. One sip keeps an Elf working for 72 hours straight. Do not mix with sugar."
+    },
+    {
+      "id": "10",
+      "name": "A.I. Naughty-or-Nice Scanner",
+      "price": 1250.50,
+      "stock": 8,
+      "category": "tech",
+      "description": "Uses deep learning algorithms to judge children's souls with 99.9% accuracy. No appeal process."
+    },
+    {
+      "id": "11",
+      "name": "Nuclear-Powered Snow Globe",
+      "price": 49.95,
+      "stock": 100,
+      "category": "crafts",
+      "description": "Shake it once, it snows for 1000 years. Glows in the dark due to mild radiation. Do not break glass."
+    },
+    {
+      "id": "12",
+      "name": "Instant Chimney Lube (Industrial)",
+      "price": 35.00,
+      "stock": 60,
+      "category": "tech",
+      "description": "Frictionless nanotech gel. Slide down even the tightest pipes without getting stuck. Wash hands after use."
     }
   ]
 }

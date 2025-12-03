@@ -14,3 +14,8 @@ export interface User {
   password?: string;
   role: string;
 }
+
+export interface cartItem {
+  product: Product;
+  quantity: number;
+}
