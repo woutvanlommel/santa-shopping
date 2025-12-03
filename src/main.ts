@@ -5,6 +5,7 @@ import { initCart, addToCart } from './cart';
 import { setupProducts } from './products';
 import { setupLogin, setupLogout, checkExistingSession } from './auth'; // Importeer de nieuwe functie
 import type { User } from './types';
+import { xMasDays } from './xmasDays';
 
 const appContainer = document.getElementById('shop-app') as HTMLDivElement;
 const loginScreen = document.getElementById('login-screen') as HTMLDivElement;
@@ -35,6 +36,8 @@ async function startShopApp(user: User) {
     setupProducts(products, (product) => {
         addToCart(product);
     });
+
+    xMasDays();
 
     setupLogout();
 }
