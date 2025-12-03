@@ -152,6 +152,7 @@ export const addToCart = (product: Product) => {
             quantity: 1
         });
     }
+    alert(`Toegevoegd aan je slee: ${product.name}`);
     
     saveCartToStorage();
 };

@@ -27,6 +27,13 @@
       "email": "mas@mas.com",
       "password": "$2b$10$33ODTunYgGq8jNsmq0S7DeocqQhZ2BCjShXOcBAXI9S6kI48lpeR.",
       "role": "logistics_manager"
+    },
+    {
+      "id": "4",
+      "name": "Winde",
+      "email": "winde@northpole.com",
+      "password": "NPole123",
+      "role": "reindeer_caretaker"
     }
   ],
   "products": [
