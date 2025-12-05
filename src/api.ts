@@ -2,14 +2,14 @@ import type { Product, User } from './types';
 
 export const fetchProducts = async (): Promise<Product[]> => {
     // ... bestaande code ...
-    const response = await fetch('http://localhost:3000/products');
+    const response = await fetch('http://localhost:3001/products');
     return response.json();
 };
 
 // NIEUW: Haal user op basis van naam
 export const fetchUserByName = async (name: string): Promise<User | null> => {
     try {
-        const response = await fetch(`http://localhost:3000/users?name=${name}`);
+        const response = await fetch(`http://localhost:3001/users?name=${name}`);
         if (!response.ok) throw new Error('Server error');
         
         const users: User[] = await response.json();

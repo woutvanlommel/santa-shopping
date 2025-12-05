@@ -21,22 +21,29 @@ export const checkExistingSession = (): User | null => {
 
 // DEZE FUNCTIE REGELT HET OOGJE
 export const viewPassword = () => {
-    const input = document.querySelector('input[name="password"]') as HTMLInputElement;
+    // 1. We gebruiken nu getElementById, dat is veiliger en sneller omdat je ID's hebt in je HTML
+    const input = document.getElementById('passwordInput') as HTMLInputElement;
     const btn = document.getElementById('viewPassword') as HTMLButtonElement;
 
-    // 1. Guard clause: als iets mist, stop direct. Scheelt haakjes {}
-    if (!input || !btn) return;
+    // 2. Guard clause: Als de knoppen niet bestaan, stop de functie (voorkomt crashes)
+    if (!input || !btn) {
+        console.warn("ViewPassword elementen niet gevonden in de HTML");
+        return;
+    }
 
-    btn.addEventListener('click', (e) => {
-        e.preventDefault();
+    // 3. Verwijder oude listeners om dubbele kliks te voorkomen (optioneel maar netjes)
+    const newBtn = btn.cloneNode(true) as HTMLButtonElement;
+    btn.parentNode?.replaceChild(newBtn, btn);
+
+    newBtn.addEventListener('click', (e) => {
+        e.preventDefault(); // Zeker weten dat het geen form submit doet
         
-        // 2. Check de status één keer
         const isHidden = input.type === 'password';
-
-        // 3. Ternary operators (korte if/else):  voorwaarde ? waar : niet-waar
+        
         input.type = isHidden ? 'text' : 'password';
         
-        btn.innerHTML = isHidden 
+        // Update het icoontje
+        newBtn.innerHTML = isHidden 
             ? '<i class="fa-solid fa-eye-slash"></i>' 
             : '<i class="fa-solid fa-eye"></i>';
     });
@@ -46,6 +53,7 @@ export const setupLogin = (onLoginSuccess: LoginSuccessCallback) => {
     const loginForm = document.getElementById('login-form') as HTMLFormElement;
     const loginScreen = document.getElementById('login-screen') as HTMLDivElement;
     const errorMessage = document.getElementById('login-error') as HTMLParagraphElement;
+    console.log("Setting up login form");
 
     if (!loginForm) return;
 
@@ -53,15 +61,18 @@ export const setupLogin = (onLoginSuccess: LoginSuccessCallback) => {
 
     loginForm.addEventListener('submit', async (event) => {
         event.preventDefault(); // Voorkom pagina reload
+        console.log("Login data ophalen");
 
         const formData = new FormData(loginForm);
         const passwordInput = formData.get('password') as string;
-        const username = formData.get('username') as string;
+        const name = formData.get('name') as string;
         
         if(errorMessage) errorMessage.innerText = '';
 
-        const user = await fetchUserByName(username);
+    try {
 
+        const user = await fetchUserByName(name);
+        console.log("Gevonden user:", user);
         if (!user) {
             if(errorMessage) errorMessage.innerText = 'Gebruiker niet gevonden.';
             return;
@@ -69,11 +80,17 @@ export const setupLogin = (onLoginSuccess: LoginSuccessCallback) => {
 
         if (user.password === passwordInput) {
             sessionStorage.setItem(STORAGE_KEY, JSON.stringify(user));
-            loginScreen.classList.add('hidden');
+            if (loginScreen){
+                loginScreen.classList.add('hidden');
+            }
             onLoginSuccess(user);
         } else {
             if(errorMessage) errorMessage.innerText = 'Wachtwoord onjuist.';
         }
+    } catch (error) {
+        console.error("Fout bij inloggen:", error);
+        if(errorMessage) errorMessage.innerText = 'Er is een fout opgetreden. Probeer het later opnieuw.';
+    }
     });
 };
 
