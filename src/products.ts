@@ -15,7 +15,7 @@ const renderList = (productList: Product[], onAddClick: AddToCartCallback) => {
     }
 
     productsDisplay.innerHTML = productList.map((product) => `
-        <div class="flex flex-col gap-4 justify-start items-start border border-b-2 border-b-red-500 p-4 rounded-lg shadow-md bg-white h-full">
+        <div class="flex flex-col gap-4 justify-start items-start border border-b-2 border-b-red-500 p-4 rounded-lg shadow-md bg-white h-full hover:shadow-lg hover:scale-105 transition-transform cursor-pointer">
             <div class="w-full flex justify-between items-center">
                 <p class="text-xs font-bold text-white uppercase bg-red-300 border-2 border-red-600 px-2 py-1 rounded-lg">${product.category}</p>
                 <p class="text-sm text-gray-500"> &#128230 ${product.stock} in stock</p>

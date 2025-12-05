@@ -7,6 +7,7 @@
     <title>Santa shop</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="/src/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
   </head>
   <body class="bg-blue-50 [font-family:var(--font-primary)]">
 
@@ -21,7 +22,12 @@
             
             <div class="mb-6 text-left">
                 <label class="block text-gray-700 text-sm font-bold mb-2">Password</label>
-                <input name="password" type="password" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-red-700 focus:shadow-outline" required>
+                <div class="flex items-center relative">
+                    <input id="passwordInput" name="password" type="password" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-red-700 focus:shadow-outline" required>
+                    <button type="button" id="viewPassword" class="p-4 absolute right-2 z-10 text-black cursor-pointer">
+                        <i class="fa-solid fa-eye"></i>
+                    </button>
+                </div>
             </div>
 
             <button type="submit" class="bg-green-600 hover:bg-green-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full cursor-pointer transition">

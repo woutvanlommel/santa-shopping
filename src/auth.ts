@@ -2,11 +2,10 @@
 import { fetchUserByName } from './api';
 import type { User } from './types';
 
-const STORAGE_KEY = 'santa_shop_user'; // De sleutel voor in de browser opslag
+const STORAGE_KEY = 'santa_shop_user'; 
 
 type LoginSuccessCallback = (user: User) => void;
 
-// NIEUW: Functie die checkt of we al ingelogd waren voor de refresh
 export const checkExistingSession = (): User | null => {
     const storedData = sessionStorage.getItem(STORAGE_KEY);
     if (storedData) {
@@ -20,6 +19,29 @@ export const checkExistingSession = (): User | null => {
     return null;
 };
 
+// DEZE FUNCTIE REGELT HET OOGJE
+export const viewPassword = () => {
+    const input = document.querySelector('input[name="password"]') as HTMLInputElement;
+    const btn = document.getElementById('viewPassword') as HTMLButtonElement;
+
+    // 1. Guard clause: als iets mist, stop direct. Scheelt haakjes {}
+    if (!input || !btn) return;
+
+    btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        
+        // 2. Check de status één keer
+        const isHidden = input.type === 'password';
+
+        // 3. Ternary operators (korte if/else):  voorwaarde ? waar : niet-waar
+        input.type = isHidden ? 'text' : 'password';
+        
+        btn.innerHTML = isHidden 
+            ? '<i class="fa-solid fa-eye-slash"></i>' 
+            : '<i class="fa-solid fa-eye"></i>';
+    });
+};
+
 export const setupLogin = (onLoginSuccess: LoginSuccessCallback) => {
     const loginForm = document.getElementById('login-form') as HTMLFormElement;
     const loginScreen = document.getElementById('login-screen') as HTMLDivElement;
@@ -27,13 +49,16 @@ export const setupLogin = (onLoginSuccess: LoginSuccessCallback) => {
 
     if (!loginForm) return;
 
+    // HIER HEBBEN WE DE DUBBELE CODE VERWIJDERD
+
     loginForm.addEventListener('submit', async (event) => {
-        event.preventDefault();
-        if(errorMessage) errorMessage.innerText = '';
+        event.preventDefault(); // Voorkom pagina reload
 
         const formData = new FormData(loginForm);
-        const username = formData.get('username') as string;
         const passwordInput = formData.get('password') as string;
+        const username = formData.get('username') as string;
+        
+        if(errorMessage) errorMessage.innerText = '';
 
         const user = await fetchUserByName(username);
 
@@ -43,11 +68,7 @@ export const setupLogin = (onLoginSuccess: LoginSuccessCallback) => {
         }
 
         if (user.password === passwordInput) {
-            // SUCCESS!
-            
-            // STAP 1: Sla de gebruiker op in de sessie!
             sessionStorage.setItem(STORAGE_KEY, JSON.stringify(user));
-
             loginScreen.classList.add('hidden');
             onLoginSuccess(user);
         } else {
@@ -57,10 +78,9 @@ export const setupLogin = (onLoginSuccess: LoginSuccessCallback) => {
 };
 
 export const setupLogout = () => {
-    const logoutBtn = document.getElementById('logoutButton'); // Let op: ID matcht met je HTML
+    const logoutBtn = document.getElementById('logoutButton'); 
     if (logoutBtn) {
         logoutBtn.addEventListener('click', () => {
-            // STAP 2: Verwijder de sessie bij uitloggen
             sessionStorage.removeItem(STORAGE_KEY);
             location.reload(); 
         });

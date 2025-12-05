@@ -3,7 +3,7 @@ import './style.css';
 import { fetchProducts } from './api';
 import { initCart, addToCart } from './cart';
 import { setupProducts } from './products';
-import { setupLogin, setupLogout, checkExistingSession } from './auth'; // Importeer de nieuwe functie
+import { setupLogin, setupLogout, checkExistingSession, viewPassword } from './auth'; // Importeer de nieuwe functie
 import type { User } from './types';
 import { xMasDays } from './xmasDays';
 
@@ -38,7 +38,6 @@ async function startShopApp(user: User) {
     });
 
     xMasDays();
-
     setupLogout();
 }
 
@@ -51,6 +50,7 @@ if (existingUser) {
     // JA: Sla login over en start direct
     startShopApp(existingUser);
 } else {
+    viewPassword();
     // NEE: Wacht tot de gebruiker het formulier invult
     setupLogin((user) => {
         startShopApp(user);
